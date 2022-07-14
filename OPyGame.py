@@ -5,23 +5,27 @@ import sys, pygame
 
 class Engine:
 
-    def __init__(self, gameName='OPyGame', w=400, h=350, FPS_LIMIT=60, RESIZE=False):
-        
+    def __init__(self, gameName='OPyGame', w=480, h=360, FPS_LIMIT=60, RESIZE=False):
+
         self.opg = pygame
         self.opg.init()
-    
+
         self.game_name = gameName
+
         self.display_size = (w,h) if not RESIZE else [w,h]
-        resize_flag = self.opg.RESIZABLE if RESIZE else None
-        self.surface = self.opg.display.set_mode(self.display_size, resize_flag)
+
+        flags = self.opg.RESIZABLE if RESIZE else 0
+
+        self.surface = self.opg.display.set_mode(self.display_size, flags)
         self.FPS_LIMIT, self.clock, self.dt = FPS_LIMIT, self.opg.time.Clock(), 0
+
         self.events = None
 
         self.opg.display.set_caption(self.game_name)
         self.opg.key.set_repeat(40, 30)
 
         self.quit = False
-        
+
     def _getDisplaySize(self,w,h):
         self.display_size[0] = w
         self.display_size[1] = h
