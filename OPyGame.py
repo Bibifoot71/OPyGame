@@ -5,12 +5,17 @@ import sys, pygame
 
 class Engine:
 
-    def __init__(self, gameName='OPyGame', w=480, h=360, FPS_LIMIT=60, RESIZE=False):
+    class VoidState:
+        def update(self): pass
+        def draw(self): pass
+
+    def __init__(self, gameName='OPyGame', defaultState=VoidState, w=640, h=480, FPS_LIMIT=60, RESIZE=False):
 
         self.opg = pygame
         self.opg.init()
 
         self.game_name = gameName
+        self.game_state = defaultState
 
         self.display_size = (w,h) if not RESIZE else [w,h]
 
@@ -42,8 +47,8 @@ class Engine:
                 elif event.type == self.opg.VIDEORESIZE:
                     self._getDisplaySize(event.w,event.h)
 
-            self.main_scene.update(self)
-            self.main_scene.draw(self)
+            self.game_state.update(self)
+            self.game_state.draw(self)
 
             self.opg.display.update()
 
