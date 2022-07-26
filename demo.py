@@ -190,8 +190,8 @@ class DemoScene3:
         # Adaptative rectangle to display size
         self.opg.draw.rect(self.surface, (255,255,255),
             self.opg.Rect(
-                (self.display_size[0]*.5) - (self.display_size[0]*.1)*.5,
-                (self.display_size[1]*.5) - (self.display_size[1]*.1)*.5,
+                (self.display_size[0] - (self.display_size[0]*.1))*.5,
+                (self.display_size[1] - (self.display_size[1]*.1))*.5,
                 self.display_size[0]*.1, self.display_size[1]*.1
             )
         )
